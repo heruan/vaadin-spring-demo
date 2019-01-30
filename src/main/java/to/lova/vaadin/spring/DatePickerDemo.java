@@ -1,6 +1,7 @@
 package to.lova.vaadin.spring;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Locale;
 
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -27,7 +28,10 @@ public class DatePickerDemo extends VerticalLayout {
         this.add(this.datePicker);
         this.add(this.localeDiv);
         this.add(this.localeSelector);
-        this.localeSelector.setItems(i18nProvider.getProvidedLocales());
+        var currentLocale = this.getLocale();
+        var locales = new HashSet<Locale>(i18nProvider.getProvidedLocales());
+        locales.add(currentLocale);
+        this.localeSelector.setItems(locales);
         this.localeSelector
                 .setRenderer(new TextRenderer<>(Locale::getDisplayName));
         this.localeSelector.addValueChangeListener(event -> {
@@ -35,7 +39,7 @@ public class DatePickerDemo extends VerticalLayout {
             this.datePicker.setLocale(locale);
             this.localeDiv.setText("Current locale: " + locale);
         });
-        this.localeSelector.setValue(Locale.ENGLISH);
+        this.localeSelector.setValue(currentLocale);
     }
 
 }
