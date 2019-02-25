@@ -1,0 +1,26 @@
+<link rel="import" href="bower_components/polymer/polymer-element.html">
+<link rel="import" href="bower_components/vaadin-tabs/vaadin-tabs.html">
+
+<dom-module id="combo-test">
+  <template>
+    <div id="navigation" part="navigation">
+      <vaadin-tabs id="tabs"></vaadin-tabs>
+    </div>
+    <div id="content" part="content">
+      <slot></slot>
+    </div>
+
+  </template>
+
+  <script>
+    class ComboTest extends Polymer.Element {
+      static get is() { return 'combo-test'; }
+      static get properties() {
+        return {
+        };
+      }
+    }
+
+    window.customElements.define(ComboTest.is, ComboTest);
+  </script>
+</dom-module>
